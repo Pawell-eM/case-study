@@ -4,10 +4,20 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use App\Command\PurchaseCandyCommand;
+use App\Machine\Entity\Candy;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
 
-$application->add(new PurchaseCandyCommand());
+// it should come from some config file
+$candies = [
+    new Candy('caramels', 4.99),
+    new Candy('lollipop', 2.99),
+    new Candy('mince drops', 0.69),
+    new Candy('chewing gum', 1.99),
+    new Candy('licorice', 3.59),
+];
+
+$application->add(new PurchaseCandyCommand($candies));
 
 $application->run();
